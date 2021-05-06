@@ -7,7 +7,7 @@ jobs: # basic units of work in a run
       # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
       - image: circleci/postgres:9.6-alpine
         environment: # environment variables for primary container
-          POSTGRES_USER: circleci-demo-goo
+          POSTGRES_USER: circleci-demo-go
           POSTGRES_DB: circle_test
 
     parallelism: 2
@@ -21,11 +21,6 @@ jobs: # basic units of work in a run
       - restore_cache: # restores saved cache if no changes are detected since last run
           keys:
             - go-mod-v4-{{ checksum "go.sum" }}
-
-      #  Wait for Postgres to be ready before proceeding
-      - run:
-          name: Waiting for Postgres to be ready
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       - run:
           name: Run unit tests
