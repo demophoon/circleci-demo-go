@@ -22,7 +22,8 @@ jobs: # basic units of work in a run
       - restore_cache: # restores saved cache if no changes are detected since last run
           keys:
             - go-mod-v3-{{ checksum "go.sum" }}
-
+            - go-mod-v3
+          
       - run:
           name: Run unit tests
           environment: # environment variables for the database url and path to migration files
